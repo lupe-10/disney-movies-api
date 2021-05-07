@@ -26,11 +26,19 @@ class Api::V1::CharactersController < ApplicationController
     end
   end
 
+  def destroy
+    if @character.destroy
+      head(:ok)
+    else
+      render_error
+    end
+  end
+
   private
 
   def render_error
     render json: { errors: @character.errors.full_messages },
-      status: :unprocessable_entity
+                   status: :unprocessable_entity
   end
 
   def set_character
@@ -42,4 +50,3 @@ class Api::V1::CharactersController < ApplicationController
   end
 end
 
-end
